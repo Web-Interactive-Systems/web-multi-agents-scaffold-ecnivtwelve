@@ -104,3 +104,43 @@ body {
         min-width: 180px;
     }
 }
+
+.sidebar-threads-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.new-thread-btn {
+    background: none;
+    border: 1px solid #2a2f42;
+    color: #7b82a0;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-thread-btn:hover {
+    background: #2a2f42;
+    color: #e4e7f0;
+}
+
+.sidebar-item.active {
+    background: #2a2f42;
+    color: #e4e7f0;
+}
+
+.sidebar-empty {
+    list-style: none;
+    font-size: 13px;
+    color: #7b82a0;
+    padding: 8px 10px;
+    font-style: italic;
+}

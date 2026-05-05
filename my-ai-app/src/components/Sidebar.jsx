@@ -1,22 +1,20 @@
 // src/components/Sidebar.jsx
+import { useSnapshot } from "valtio";
+import { store, newThread, setActiveThread } from "../store";
 
 const features = [
-  { id: "home", label: "🏠 Home" },
-  { id: "chat", label: "💬 Chat" },
-  { id: "research", label: "🔬 Research" },
-  { id: "write", label: "✍️  Write" },
-];
-
-const threads = [
-  { id: "t1", label: "What is quantum entanglement?" },
-  { id: "t2", label: "Write a cover letter" },
-  { id: "t3", label: "Summarize this paper" },
+  { id: "home", label: "🏠 Home", path: "/" },
+  { id: "chat", label: "💬 Chat", path: "/chat" },
+  { id: "research", label: "🔬 Research", path: "/research" },
+  { id: "write", label: "✍️  Write", path: "/write" },
 ];
 
 function Sidebar() {
+  const snap = useSnapshot(store); // reactive snapshot
+
   return (
     <aside className="sidebar">
-      {/* ── TOP ZONE: app features ── */}
+      {/* ── TOP ZONE ── */}
       <div className="sidebar-features">
         <p className="sidebar-section-label">Features</p>
         <nav>
@@ -28,15 +26,35 @@ function Sidebar() {
         </nav>
       </div>
 
-      {/* ── BOTTOM ZONE: chat threads ── */}
+      {/* ── BOTTOM ZONE ── */}
       <div className="sidebar-threads">
-        <p className="sidebar-section-label">Recent chats</p>
+        <div className="sidebar-threads-header">
+          <p className="sidebar-section-label">Recent chats</p>
+          <button
+            className="new-thread-btn"
+            onClick={newThread}
+            title="New chat"
+          >
+            +
+          </button>
+        </div>
+
         <ul>
-          {threads.map((t) => (
-            <li key={t.id} className="sidebar-item thread-item">
-              {t.label}
+          {snap.threads.map((thread) => (
+            <li
+              key={thread.id}
+              className={`sidebar-item thread-item ${
+                thread.id === snap.activeThreadId ? "active" : ""
+              }`}
+              onClick={() => setActiveThread(thread.id)}
+            >
+              {thread.title}
             </li>
           ))}
+
+          {snap.threads.length === 0 && (
+            <li className="sidebar-empty">No chats yet</li>
+          )}
         </ul>
       </div>
     </aside>
