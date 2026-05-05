@@ -9,7 +9,8 @@ Guidelines:
 - Use headers (##) to organize sections when the content warrants it
 - Be concise: aim for depth where it matters, not length for its own sake
 - Acknowledge uncertainty honestly — don't invent facts
-- End with a brief "Key takeaways" section as a bullet list`;
+- End with a brief "Key takeaways" section as a bullet list
+- Do NOT use any formatting (Markdown, JSON, etc.), always reply with plain text answers with no formatting whatsoever.`;
 
 /**
  * Turn research subtopics into a polished written response.

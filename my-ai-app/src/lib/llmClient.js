@@ -1,5 +1,8 @@
 // src/lib/llmClient.js
 import OpenAI from "openai";
+const SYSTEM_PROMPT = `
+You are a helpful, concise AI assistant. Do NOT use any formatting (Markdown, JSON, etc.), always reply with plain text answers with no formatting whatsoever.
+`.trim();
 
 // ── Instantiate the client once ──────────────────────────────
 // The OpenAI SDK works with any OpenAI-compatible endpoint.
@@ -29,10 +32,7 @@ const DEFAULT_MODEL = import.meta.env.VITE_LLM_MODEL;
  * @returns {Promise<string>}      - Resolves to the full response text
  */
 export async function streamCompletion(messages, onChunk, options = {}) {
-  const {
-    model = DEFAULT_MODEL,
-    systemPrompt = "You are a helpful, concise AI assistant.",
-  } = options;
+  const { model = DEFAULT_MODEL, systemPrompt = SYSTEM_PROMPT } = options;
 
   // Build the full messages array with the system prompt prepended
   const fullMessages = [{ role: "system", content: systemPrompt }, ...messages];
@@ -68,10 +68,7 @@ export async function streamCompletion(messages, onChunk, options = {}) {
  * @returns {Promise<string>}
  */
 export async function complete(messages, options = {}) {
-  const {
-    model = DEFAULT_MODEL,
-    systemPrompt = "You are a helpful AI assistant.",
-  } = options;
+  const { model = DEFAULT_MODEL, systemPrompt = SYSTEM_PROMPT } = options;
 
   const fullMessages = [{ role: "system", content: systemPrompt }, ...messages];
 
