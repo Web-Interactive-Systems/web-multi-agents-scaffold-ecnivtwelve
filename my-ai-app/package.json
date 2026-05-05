@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "openai": "^6.36.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router": "^7.14.2",
+    "valtio": "^2.3.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

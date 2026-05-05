@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "openai": "^6.36.0",
-    "react-router": "^7.14.2",
-    "valtio": "^2.3.2"
-  }
-}
