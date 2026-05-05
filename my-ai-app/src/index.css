@@ -144,3 +144,37 @@ body {
     padding: 8px 10px;
     font-style: italic;
 }
+
+.page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #e4e7f0;
+}
+
+.page p {
+    color: #7b82a0;
+}
+
+/* Add to index.css */
+.sidebar-item,
+a.sidebar-item {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #c5c8d8;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}

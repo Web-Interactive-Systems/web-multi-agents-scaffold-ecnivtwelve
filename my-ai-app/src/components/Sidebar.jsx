@@ -1,4 +1,5 @@
 // src/components/Sidebar.jsx
+import { Link, useLocation } from "react-router";
 import { useSnapshot } from "valtio";
 import { store, newThread, setActiveThread } from "../store";
 
@@ -10,7 +11,14 @@ const features = [
 ];
 
 function Sidebar() {
-  const snap = useSnapshot(store); // reactive snapshot
+  const snap = useSnapshot(store);
+  const location = useLocation(); // current URL
+
+  function handleNewThread() {
+    newThread();
+    // Also navigate to chat route so the chat UI opens
+    // We'll wire this up properly in Chapter 6
+  }
 
   return (
     <aside className="sidebar">
@@ -19,9 +27,15 @@ function Sidebar() {
         <p className="sidebar-section-label">Features</p>
         <nav>
           {features.map((f) => (
-            <button key={f.id} className="sidebar-item">
+            <Link
+              key={f.id}
+              to={f.path}
+              className={`sidebar-item ${
+                location.pathname === f.path ? "active" : ""
+              }`}
+            >
               {f.label}
-            </button>
+            </Link>
           ))}
         </nav>
       </div>
@@ -32,7 +46,7 @@ function Sidebar() {
           <p className="sidebar-section-label">Recent chats</p>
           <button
             className="new-thread-btn"
-            onClick={newThread}
+            onClick={handleNewThread}
             title="New chat"
           >
             +
@@ -53,7 +67,7 @@ function Sidebar() {
           ))}
 
           {snap.threads.length === 0 && (
-            <li className="sidebar-empty">No chats yet</li>
+            <li className="sidebar-empty">No chats yet. Hit + to start.</li>
           )}
         </ul>
       </div>
