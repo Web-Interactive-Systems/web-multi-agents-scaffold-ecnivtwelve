@@ -2,6 +2,7 @@
 import { Link, useLocation } from "react-router";
 import { useSnapshot } from "valtio";
 import { store, newThread, setActiveThread } from "../store";
+import { useNavigate } from "react-router";
 
 const features = [
   { id: "home", label: "🏠 Home", path: "/" },
@@ -13,11 +14,17 @@ const features = [
 function Sidebar() {
   const snap = useSnapshot(store);
   const location = useLocation(); // current URL
+  const navigate = useNavigate();
 
   function handleNewThread() {
     newThread();
-    // Also navigate to chat route so the chat UI opens
-    // We'll wire this up properly in Chapter 6
+    navigate("/chat");
+  }
+
+  // Also, clicking an existing thread should navigate to chat:
+  function handleThreadClick(threadId) {
+    setActiveThread(threadId);
+    navigate("/chat");
   }
 
   return (
@@ -60,7 +67,7 @@ function Sidebar() {
               className={`sidebar-item thread-item ${
                 thread.id === snap.activeThreadId ? "active" : ""
               }`}
-              onClick={() => setActiveThread(thread.id)}
+              onClick={() => handleThreadClick(thread.id)}
             >
               {thread.title}
             </li>
