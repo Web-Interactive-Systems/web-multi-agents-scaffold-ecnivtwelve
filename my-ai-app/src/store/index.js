@@ -1,5 +1,6 @@
 // src/store/index.js
 import { proxy } from "valtio";
+import { devtools } from "valtio/utils";
 
 // ── Thread shape ─────────────────────────────────────────────
 // A thread is a conversation. It contains an array of messages.
@@ -37,6 +38,7 @@ export const store = proxy({
   // UI state: which sidebar panel is visible on mobile
   sidebarOpen: true,
 });
+devtools(store, { name: "threads", enabled: true });
 
 // ── Actions ──────────────────────────────────────────────────
 // Actions are plain functions that mutate the store.
