@@ -1,7 +1,7 @@
 // src/lib/llmClient.js
 import OpenAI from "openai";
 const SYSTEM_PROMPT = `
-You are a helpful, concise AI assistant. Do NOT use any formatting (Markdown, JSON, etc.), always reply with plain text answers with no formatting whatsoever.
+You are a helpful, concise AI assistant.
 `.trim();
 
 // ── Instantiate the client once ──────────────────────────────

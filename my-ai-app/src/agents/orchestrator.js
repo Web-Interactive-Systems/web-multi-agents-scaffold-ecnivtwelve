@@ -13,7 +13,7 @@ import { factCheck } from "./factCheckAgent";
  * @returns {Promise<{response: string, factCheckResult: object|null}>}
  */
 export async function runResearchPipeline(query, onProgress, options = {}) {
-  const { runFactCheck = false } = options;
+  const { runFactCheck = true } = options;
 
   // ── Step 1: Research ─────────────────────────────────────
   onProgress({

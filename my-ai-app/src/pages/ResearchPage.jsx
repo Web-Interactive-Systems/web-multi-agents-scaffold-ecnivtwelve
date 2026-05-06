@@ -2,6 +2,15 @@
 import { useState } from "react";
 import { runResearchPipeline } from "../agents/orchestrator";
 
+import { marked } from "marked";
+
+export function Markdown({ content }) {
+  // Parse markdown into html
+  const html = "" + marked.parse(content);
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
 function ProgressLog({ steps }) {
   if (steps.length === 0) return null;
   return (
@@ -36,7 +45,7 @@ function ResearchPage() {
       const { response, subtopics } = await runResearchPipeline(
         query,
         addStep,
-        { runFactCheck: false }, // set to true to enable fact-checking
+        { runFactCheck: true }, // set to true to enable fact-checking
       );
       setResult(response);
     } catch (error) {
@@ -87,7 +96,7 @@ function ResearchPage() {
               then: import ReactMarkdown from 'react-markdown'
               <ReactMarkdown>{result}</ReactMarkdown>
           */}
-          <pre className="research-output">{result}</pre>
+          <Markdown content={result} />
         </div>
       )}
     </div>

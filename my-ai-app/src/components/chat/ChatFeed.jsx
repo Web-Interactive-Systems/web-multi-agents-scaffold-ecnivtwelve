@@ -1,6 +1,13 @@
 // src/components/chat/ChatFeed.jsx
 import { useEffect, useRef } from "react";
+import { marked } from "marked";
 
+export function Markdown({ content }) {
+  // Parse markdown into html
+  const html = "" + marked.parse(content);
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+}
 function MessageBubble({ message }) {
   const isUser = message.role === "user";
 
@@ -8,14 +15,8 @@ function MessageBubble({ message }) {
     <div className={`message-row ${isUser ? "user" : "assistant"}`}>
       <div className="message-avatar">{isUser ? "👤" : "🤖"}</div>
       <div className="message-bubble">
-        {/* Render newlines as <br> for basic formatting */}
-        {message.content.split("\n").map((line, i) => (
-          <span key={i}>
-            {line}
-            {i < message.content.split("\n").length - 1 && <br />}
-          </span>
-        ))}
-        {/* Blinking cursor shown during streaming (empty content = still arriving) */}
+        <Markdown content={message.content} />
+
         {message.role === "assistant" && message.streaming && (
           <span className="streaming-cursor">▌</span>
         )}
